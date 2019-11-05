@@ -2,7 +2,9 @@ const errorHandler = (err, req, res, next) => {
   // Log to console
   console.log(err.stack.red);
 
-  res.status(500).json({ success: false, error: err.message });
+  res
+    .status(err.statuseCode || 500)
+    .json({ success: false, error: err.message || 'Server error' });
 };
 
 module.exports = errorHandler;
